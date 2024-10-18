@@ -1,94 +1,158 @@
-body{
-    font: 75% georgia, sans-serif;
-    background-image: url("bcgk.png");
-    background-repeat: repeat;
-    background-size: cover;
+@media screen and (max-width: 375px) {
+    .body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "header"
+        "menu"
+        "lewa"
+        "prawa"
+        "footer";
+    }
 }
 
-header{
-    grid-area: banner;
-    height: 30px;
+*{
+    box-sizing: border-box;
 }
-header h1{
-    font: bold 4em georgia, sans-serif;
-    text-align: right;
-    letter-spacing: 1px;
-    margin-bottom: 0;
-    color: #4781c4;
-    transition: 1s ease;
+html, body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(45deg, #ffffff 0%, #9f9f9f 46%, #676767 100%);
+    background-size: cover;
+    display: grid;
+    grid:
+    "header header header"
+    "menu menu menu"
+    "content content"
+    "footer footer footer";
 }
-header h1:hover {
-    font: bold 5em georgia, sans-serif;
-}
-header h2{
-    font: bold 1.5em georgia, sans-serif;
-    text-align: left;
-    letter-spacing: 1px;
-    margin-bottom: 0;
+
+.header{
+    background-image: url("bcgk_2.jpg");
+    background-size: cover;
+    padding: 20px;
+    text-align: center;
+    font-size: 35px;
     color: #ffffff;
 }
-header::after{
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #ffffff;
-    margin-top: 10px;
+
+.header h1{
+    --a: -45deg;
+    --t: .23em;
 }
 
-#menu{
-    text-align: right;
+.header h1 span{
+    --_s: calc(var(--t)*cos(var(--a)));
+    background:
+            linear-gradient(var(--a),#0000 var(--_s),currentColor 0 calc(100% - var(--_s)),#0000 0)
+            bottom/var(--i,90%) var(--t) no-repeat;
+    padding: 0 .25em calc(var(--t) + .1em);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: .3s;
+    cursor: pointer;
 }
 
-a{
-    font: bold 2em Georgia sans-serif;
-    border: 1px solid #ffffff;
-    border-radius: 5px;
-    margin: 10px;
-    padding: 10px;
-
-}
-a:link{
-    text-decoration: none;
-}
-a:hover{
-    text-shadow: 0 0 5px #ffd800;
+.header h1 span:hover{
+    --i: 100%;
 }
 
-
-.container{
-    display: grid;
-    grid-template-areas:
-        "banner banner"
-        "sidebar content"
-        "sidebar footer";
-    grid-template-columns: 1fr 4fr;
-    height: 100vh;
-}
-
-.sidebar{
-    background: url("splash.jpg");
+.menu{
+    overflow: hidden;
     text-align: center;
-    grid-area: sidebar;
-    padding: 0;
-    padding-left: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /*Środkowanie w pionie*/
-    align-items: center;    /*Środkowanie w poziomie*/
-
-}
-
-.content{
-    text-align: center;
+    background: #2E230F;
     font-size: 1.5em;
-    grid-area: content;
+    box-shadow: 0 5px 15px gray;
+}
+
+.menu a{
+    color: #ffffff;
+    padding: 20px 25px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover{
+    background-color: #433115;
+    color: #ffffff;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.column{
+    background: #e5e5e5;
+    min-height: 100vh;
+}
+ul{
+    list-style-type: square;
+    font-family: 'Courier New', Courier, monospace;
+}
+.column ul{
+    list-style: disc;
+    list-style-position: inside;
+    text-align: center;
+}
+.content{
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "lewa prawa";
+    gap: 15px;
+}
+
+.lewa {
+    min-height: 100vh;
     padding: 10px;
+    grid-area: lewa;
+    transition: box-shadow 1s ease;
+}
+.lewa:hover{
+    box-shadow: 0 0 15px gray;
+}
+.lewa h2{
+    text-align: right;
+    font-size: 2.5em;
+    padding: 20px;
+    border: 3px dashed #ff5733;
+    border-radius: 10px;
+    background-color: rgba(255, 87, 51, 0.1);
+    color: #ff5733;
+    text-shadow: 2px 2px 3px #333;
+
+}
+p{
+    font-family: 'Georgia', serif;
+    font-size: 1.2em;
+    color: #333;
+    text-align: justify;
+    margin: 20px 0;
+    padding: 10px
+}
+.lewa h3{
+    text-align: center;
+    font-size: 1.8em;
+    padding: 15px;
+    color: #33c1ff;
+    text-shadow: 1px 1px 2px #666;
+}
+
+.prawa{
+    min-height: 100vh;
+    padding: 10px;
+    grid-area: prawa;
+    transition: box-shadow 1s ease;
+}
+.prawa:hover{
+    box-shadow: 0 0 15px gray;
 }
 
 .footer{
-    text-align: center;
     grid-area: footer;
-    background-color: RGBA(0,0,0,0.5);
+    background-color: #2E230F;
     padding: 10px;
+    text-align: center;
+    font-size: 15px;
+    color: #dad7cd;
+    box-shadow: 0 -5px 10px gray;
 }
